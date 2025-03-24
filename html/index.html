@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVLD Drift Counter</title>
+    <style>
+        body {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: Arial, sans-serif;
+            font-size: 40px;
+            font-weight: bold;
+            color: rgb(219, 149, 149); /* Main points color */
+            text-shadow: 2px 2px 5px black;
+            display: none;
+            text-align: center; /* Center text */
+        }
+
+        #multiplier {
+            font-size: 28px;  /* Smaller multiplier size */
+            color: rgb(233, 95, 95); /* Gold color */
+            display: block; /* Ensure it stays below the points */
+            margin-top: 5px; /* Space from points */
+        }
+    </style>
+</head>
+<body id="driftCounter">
+    <span id="pointsText">0</span>
+    <span id="multiplier">x2</span>
+</body>
+
+<script>
+    window.addEventListener('message', function(event) {
+        if (event.data.action === "show") {
+            document.getElementById("pointsText").innerHTML = event.data.points;
+            document.getElementById("multiplier").innerHTML = "x" + event.data.multiplier * 2;
+            document.getElementById("driftCounter").style.display = "block";
+        } 
+        else if (event.data.action === "hide") {
+            document.getElementById("driftCounter").style.display = "none";
+        }
+    });
+</script>
+</html>
